@@ -2,16 +2,23 @@ document.addEventListener('DOMContentLoaded', () => {
   // semua JS kau letak sini
 });
 
-// Smooth scroll for anchor links
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-  anchor.addEventListener('click', function(e) {
-    e.preventDefault();
-    const target = document.querySelector(this.getAttribute('href'));
-    if(target){
-      target.scrollIntoView({ behavior: 'smooth' });
+// Kod asal awak mungkin nampak macam ni:
+// const target = document.querySelector(this.getAttribute('href')); // NI PUNCA ERROR
+
+// TUKAR KEPADA YANG INI:
+const href = this.getAttribute('href');
+
+// Check kalau href tu wujud, bukan cuma '#' dan bermula dengan '#'
+if (href && href !== '#' && href.startsWith('#')) {
+    const target = document.querySelector(href);
+    if (target) {
+        // Buatlah apa yang awak nak buat, contohnya smooth scroll
+        target.scrollIntoView({ behavior: 'smooth' });
     }
-  });
-});
+} else if (href === '#') {
+    // Kalau dia cuma '#', kita boleh suruh dia skrol ke atas sekali
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+}
 
 // Cursor
 const cursor = document.querySelector('.cursor');
@@ -147,3 +154,4 @@ gsap.from([".avatar-container", ".card"], {
   ease: "back.out(1.7)"
 });
 
+const allProject = document.querySelectorAll('a, .social-btn, .nav-link, .project-card, .polaroid-card');
