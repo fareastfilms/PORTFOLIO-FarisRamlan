@@ -354,6 +354,76 @@ a:hover .red-circle, .social-btn:hover .red-circle {
   100% { transform: translate(-51%, -50%) rotate(-6deg) scale(1); }
 }
 
+.polaroid-card {
+  background: white;
+  padding: 15px 15px 40px 15px; /* Padding bawah lebih besar untuk gaya polaroid */
+  width: 300px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Bayang supaya nampak timbul */
+  transform: rotate(-2deg); /* Sengetkan sikit supaya nampak macam dalam buku */
+  transition: transform 0.3s ease;
+  display: inline-block;
+  margin: 20px;
+}
+
+.polaroid-card:hover {
+  transform: rotate(0deg) scale(1.05); /* Jadi tegak balik bila hover */
+}
+
+.polaroid-card::before {
+  content: "";
+  position: absolute;
+  top: -20px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80px;
+  height: 30px;
+  background: rgba(255, 255, 150, 0.5); /* Warna washi tape */
+  border: 1px solid rgba(0,0,0,0.05);
+}
+
+.polaroid-image img {
+  width: 100%;
+  height: auto;
+  border: 1px solid #eee;
+}
+
+.polaroid-caption {
+  font-family: 'Courier New', Courier, monospace; /* Font mesin taip/tulis tangan */
+  font-size: 14px;
+  margin-top: 15px;
+  color: #333;
+}
+
+.projects-container {
+  display: flex;
+  flex-wrap: wrap; /* Supaya kalau banyak, dia turun bawah automatik */
+  justify-content: center; /* Letak kat tengah skrin */
+  gap: 30px; /* Jarak antara setiap gambar */
+  padding: 50px;
+}
+
+.highlight-title {
+  display: inline-block;
+  padding: 0 10px;
+  transition: background-color 0.3s ease;
+  cursor: pointer;
+  border-radius: 5px; /* Sikit rounded kat bucu */
+}
+
+/* Bila kursor point (hover), dia jadi kuning */
+.highlight-title:hover {
+  background-color: #fdfd96; /* Kuning pastel lembut */
+  /* Kita boleh tambah kesan senget sikit macam marker */
+  box-shadow: inset 0 -15px 0 rgba(255, 255, 0, 0.3); 
+}
+
+.marker {
+  background: linear-gradient(100deg, rgba(255, 250, 150, 0.7) 0%, rgba(255, 250, 150, 0.3) 100%);
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-weight: bold;
+}
+
 /* Responsive */
 @media (max-width: 768px) {
 
