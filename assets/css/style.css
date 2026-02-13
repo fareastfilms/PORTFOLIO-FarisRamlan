@@ -1,0 +1,552 @@
+/* RESET */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Patrick Hand', cursive; /* Font tulisan tangan */
+  background-color: #f8f6f1; /* Warna kertas pudar */
+  background-image: 
+    linear-gradient(rgba(180, 200, 230, 0.5) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(180, 200, 230, 0.5) 1px, transparent 1px);
+  background-size: 30px 30px; /* Saiz kotak grid */
+}
+
+/* NAVBAR */
+.navbar {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  margin-bottom: 10px;
+  background: rgba(255, 255, 255, 0.9);
+  display: flex;
+  justify-content: center;
+  padding: 12px 0;
+  z-index: 999;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+.navbar ul {
+  display: flex;
+  list-style: none;
+  gap: 40px;
+  margin: 0;
+  padding: 0;
+}
+
+.navbar a {
+  text-decoration: none;
+  color: #222;
+  font-weight: 500;
+  position: relative;
+  padding: 10px 15px; /* Tambah ruang dalam supaya bulatan ada 'bilik' */
+  display: inline-block;
+  z-index: 1;
+  transition: color 0.3s ease;
+}
+
+/* HERO */
+/* Rapatkan Avatar dengan Hello Card */
+.hero {
+  min-height: 100vh; /* Setinggi skrin */
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* Letak semua benda kat tengah secara menegak */
+  align-items: center;     /* Letak semua benda kat tengah secara mendatar */
+  padding-top: 20px;       /* Ruang untuk navbar */
+  text-align: center;
+}
+
+.avatar-container {
+  width: 200px;
+  height: 200px;
+  overflow: hidden;
+  border-radius: 50%;
+  border: 5px solid white;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #fff;
+  margin-top: 0;
+  margin-bottom: -20px; /* Rapatkan jurang dengan kad di bawahnya */
+  z-index: 10;
+  position: relative;
+}
+
+.avatar-image {
+  width: 110%; /* Besar sikit supaya tak nampak ruang kosong bila gerak */
+  height: auto;
+  /* Kita akan update --x dan --y guna JS */
+  transform: translate(var(--x, 0px), var(--y, 0px)) scale(1.1);
+  transition: transform 0.1s ease-out; /* Biar nampak smooth */
+}
+
+/* CARD (AUTO HEIGHT = COMEY) */
+.card {
+background: white;
+  padding: 30px;
+  max-width: 500px;
+  margin: 0;
+  border-radius: 4px;
+  text-align: center;
+  box-shadow: 10px 10px 0px rgba(0, 0, 0, 0.05), /* Bayang gaya ilustrasi */
+              2px 6px 0px rgba(0,0,0,0.05);
+  border: 1px solid #ddd;
+  transition: transform 0.1s ease, box-shadow .3s ease;
+  position: relative;
+  z-index: 5;
+}
+
+.card:hover {
+  transform: translateY(-6px) rotate(-0.3deg);
+  box-shadow: 0 25px 50px rgba(0,0,0,0.12);
+}
+
+.card h1 {
+  margin-top: 10px;
+  margin-bottom: 5px;
+}
+
+.card p {
+  margin: 0;
+  color: #555;
+}
+
+/* SECTIONS */
+.section {
+  padding: 40px 20px; /* Kurangkan padding atas & bawah (asal mungkin 100px) */
+  min-height: auto;   /* Elakkan setiap section paksa ambil satu skrin penuh */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Pastikan setiap section mengambil ruang penuh skrin */
+.section, .hero {
+  min-height: 100vh; /* Setiap bahagian akan jadi setinggi skrin */
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* Center secara menegak */
+  align-items: center;     /* Center secara mendatar */
+  padding: 80px 20px;
+  position: relative;
+}
+
+.section h2 {
+  font-size: 32px;
+  margin-bottom: 16px;
+}
+
+
+/* Merapatkan tajuk dengan butang */
+#contact h2 {
+  margin-bottom: -10px; /* Kurangkan jarak bawah tajuk (asal mungkin 30px-40px) */
+}
+
+/* Kalau nak lagi rapat, guna margin-top negatif pada social-links */
+#contact .social-links {
+  margin-top: 30px; 
+  display: flex;
+  justify-content: center;
+  gap: 70px;
+}
+
+#contact.section {
+  justify-content: center; /* Pastikan dia di tengah */
+  gap: 20px; /* Jarak antara h2 dan div social-links */
+}
+
+/* PROJECTS */
+.bussiness-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 24px;
+  max-width: 900px;
+  margin: 40px auto 0;
+}
+
+.bussiness-card {
+  background: white;
+  padding: 24px;
+  border-radius: 16px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+  transition: transform .3s ease;
+}
+
+.bussiness-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 12px 24px rgba(0,0,0,0.12);
+}
+
+.bussiness-card h3 {
+  margin-bottom: 12px;
+  font-size: 1.25rem;
+}
+
+.bussiness-card p {
+  margin-bottom: 12px;
+  color: #555;
+  transition: transform 0.3s ease;
+}
+
+.bussiness-card p:hover {
+  transform: translateY(-2px);
+}
+
+.bussiness-card a {
+  text-decoration: none;
+  color: #0077ff;
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
+
+.bussiness-card a:hover {
+  color: #0056cc;
+}
+
+/* SOCIAL */
+.social-links {
+  display: flex;            /* Wajib ada untuk susun sebaris */
+  justify-content: center;  /* Letak semua kat tengah-tengah */
+  align-items: center;      /* Bagi semua ikon sama tinggi */
+  gap: 25px;                /* Jarak antara butang */
+  flex-wrap: wrap;          /* Supaya tak hancur kalau skrin kecil */
+  margin-top: 20px;
+}
+
+.social-btn {
+  display: flex;            /* Pastikan butang itu sendiri adalah flex */
+  justify-content: center;
+  align-items: center;
+  width: 60px;
+  height: 60px;
+  position: relative;
+  text-decoration: none;
+  font-size: 30px;         /* Saiz ikon */
+  color: #333;
+}
+
+.social-btn:hover {
+  transform: translateY(-5px) rotate(5deg); /* Efek melompat sikit */
+  color: black; /* Ikon tukar jadi merah sikit bila hover */
+}
+
+/* Bulat Merah Pen */
+.social-btn .red-circle {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 160%; /* Besarkan bulatan supaya tak kena ikon */
+  height: 130%;
+  fill: none;
+  stroke: #ff4d4d;
+  stroke-width: 3;
+  stroke-linecap: round;
+  stroke-dasharray: 400;
+  stroke-dashoffset: 400;
+  transition: stroke-dashoffset 0.5s ease;
+  pointer-events: none;
+}
+
+.social-btn:hover .red-circle {
+  stroke-dashoffset: 0;
+}
+
+/* CURSOR */
+.cursor {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 48px;
+  height: 48px;
+  pointer-events: none;
+  z-index: 9999;
+  will-change: transform;
+}
+
+.cursor img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+}
+
+/* Mengawal Avatar supaya lebih ke atas */
+.avatar-container {
+  width: 200px;       /* Kecilkan sikit saiz jika perlu */
+  height: 200px;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  z-index: 2;
+}
+
+.home-section {
+  min-height: 100vh;      /* Penuh satu skrin */
+  display: flex;
+  flex-direction: column; /* Susun menegak */
+  justify-content: center;/* Letak tengah skrin secara menegak */
+  align-items: center;    /* Letak tengah secara mendatar */
+  
+  /* UBAH NILAI INI UNTUK JARAKKAN */
+  gap: 50px;              /* Contoh: 50px untuk jarak yang lebih luas */
+  
+  background-color: #f8f6f1;
+}
+
+#live2d-canvas {
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+}
+
+/* ANIMASI BULAT MERAH (PEN EFFECT) */
+.nav-link, .social-btn, .project-card a {
+  position: relative;
+  z-index: 1;
+}
+
+/* Kita guna SVG sebagai background untuk nampak macam lukisan pen */
+.red-circle {
+position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) rotate(-5deg); /* Sengetkan sikit */
+  width: 150%; 
+  height: 150%;
+  fill: none;
+  
+  /* Warna merah pen ballpoint/felt-tip */
+  stroke: #d63031; 
+  stroke-width: 2.5;
+  stroke-linecap: round;
+  
+  /* Gunakan filter yang kita buat tadi */
+  filter: url(#ink-effect);
+  
+  /* Animasi lukisan */
+  stroke-dasharray: 600;
+  stroke-dashoffset: 600;
+  transition: stroke-dashoffset 0.6s cubic-bezier(0.45, 0.05, 0.55, 0.95);
+  pointer-events: none;
+}
+
+.red-circle path {
+  vector-effect: non-scaling-stroke;
+}
+
+/* Bila hover, lukisan bulat akan 'berjalan' */
+a:hover .red-circle, .social-btn:hover .red-circle {
+  stroke-dashoffset: 0;
+  animation: jitter 0.2s infinite;
+}
+
+@keyframes jitter {
+  0% { transform: translate(-50%, -50%) rotate(-5deg) scale(1); }
+  50% { transform: translate(-50%, -51%) rotate(-4deg) scale(1.02); }
+  100% { transform: translate(-51%, -50%) rotate(-6deg) scale(1); }
+}
+
+.polaroid-card {
+  background: white;
+  padding: 15px 15px 40px 15px;
+  width: 300px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  transform: rotate(-2deg);
+  /* Kita tukar transition jadi lebih 'bouncy' sikit */
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  display: inline-block;
+  margin: 20px;
+  position: relative; /* Wajib ada untuk washi tape */
+  z-index: 5;
+}
+
+.polaroid-card:hover {
+  /* Kita tambah translateY supaya dia melompat naik sikit */
+  transform: rotate(0deg) scale(1.1) translateY(-15px);
+  box-shadow: 0 25px 50px rgba(0,0,0,0.3);
+  z-index: 100; /* Supaya dia duduk atas element lain */
+}
+
+/* KEKALKAN GAYA WASHI TAPE AWAK */
+.polaroid-card::before {
+  content: "";
+  position: absolute;
+  top: -20px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80px;
+  height: 30px;
+  background: rgba(255, 255, 150, 0.5); 
+  border: 1px solid rgba(0,0,0,0.05);
+  z-index: 2;
+}
+
+.polaroid-image img {
+  width: 100%;
+  height: auto;
+  border: 1px solid #eee;
+}
+
+.polaroid-caption {
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 14px;
+  margin-top: 15px;
+  color: #333;
+  text-align: center; /* Bagi cantik sikit kat tengah */
+}
+
+.bussiness-container {
+  display: flex;
+  flex-wrap: wrap; /* Supaya kalau banyak, dia turun bawah automatik */
+  justify-content: center; /* Letak kat tengah skrin */
+  gap: 30px; /* Jarak antara setiap gambar */
+  padding: 50px;
+}
+
+.highlight-title {
+  display: inline-block;
+  padding: 0 10px;
+  transition: background-color 0.3s ease;
+  cursor: pointer;
+  border-radius: 5px; /* Sikit rounded kat bucu */
+}
+
+/* Bila kursor point (hover), dia jadi kuning */
+.highlight-title:hover {
+  background-color: #fdfd96; /* Kuning pastel lembut */
+  /* Kita boleh tambah kesan senget sikit macam marker */
+  box-shadow: inset 0 -15px 0 rgba(255, 255, 0, 0.3); 
+}
+
+.marker {
+  background: linear-gradient(100deg, rgba(255, 250, 150, 0.7) 0%, rgba(255, 250, 150, 0.3) 100%);
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-weight: bold;
+}
+/* VIDEO */
+/* TikTok Showcase Styling */
+/* Stacked Carousel Styling */
+.carousel-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    width: 100%;
+    margin: 40px 0;
+}
+
+.stack-container {
+    position: relative;
+    height: 400px;
+    width: 800px; /* Adjust based on screen */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.video-card {
+    position: absolute;
+    width: 200px;
+    height: 350px;
+    background: #000;
+    border-radius: 20px;
+    overflow: hidden;
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 15px 35px rgba(0,0,0,0.3);
+}
+
+.video-card video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Susunan Posisi Kad */
+.stack-1 { transform: translateX(-280px) scale(0.7); z-index: 1; opacity: 0.5; }
+.stack-2 { transform: translateX(-160px) scale(0.85); z-index: 2; opacity: 0.8; }
+.stack-3.active { transform: translateX(0) scale(1.1); z-index: 10; opacity: 1; border: 4px solid #fff; }
+.stack-4 { transform: translateX(160px) scale(0.85); z-index: 2; opacity: 0.8; }
+.stack-5 { transform: translateX(280px) scale(0.7); z-index: 1; opacity: 0.5; }
+
+/* Buttons & Profile */
+.btn-follow { background: #0095f6; color: #fff; padding: 10px 24px; border-radius: 8px; text-decoration: none; font-weight: bold; }
+.share-btn { background: #fff; border: 1px solid #ddd; padding: 12px 20px; border-radius: 12px; font-weight: bold; cursor: pointer; display: flex; align-items: center; gap: 10px; }
+/* Responsive */
+@media (max-width: 768px) {
+
+  .home-section {
+    gap: 30px; /* Jarak lebih kecil sikit untuk skrin telefon */
+  }
+
+  .container {
+    padding-top: 60px;
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+
+  .card {
+    padding: 32px;
+    max-width: 100%;
+    border-radius: 12px;
+  }
+
+  h1 {
+    font-size: 1.5rem;
+  }
+
+  p {
+    font-size: 0.95rem;
+  }
+}
+
+.nav-btn {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%; /* Jadi bulat */
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    background: rgba(255, 255, 255, 0.1); /* Efek kaca */
+    backdrop-filter: blur(10px); /* Blur belakang butang */
+    color: black;
+    font-size: 20px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 100;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+}
+
+/* Bila Hover (Lalu Kursor) */
+.nav-btn:hover {
+    background: white;
+    color: black;
+    transform: scale(1.1);
+    box-shadow: 0 12px 40px rgba(255, 255, 255, 0.3);
+}
+
+/* Bila Klik */
+.nav-btn:active {
+    transform: scale(0.9);
+}
+
+/* Posisi butang supaya tak kacau video */
+.carousel-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between; /* Butang kiri & kanan video */
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 50px;
+}
