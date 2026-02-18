@@ -550,3 +550,25 @@ a:hover .red-circle, .social-btn:hover .red-circle {
     margin: 0 auto;
     padding: 0 50px;
 }
+
+.handled-card-link {
+    text-decoration: none; /* Hilangkan garis bawah */
+    color: inherit; /* Ikut warna asal text */
+    display: block;
+}
+
+.handled-card {
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Efek bila kursor lalu */
+.handled-card:hover .stats {
+    color: #ff4d4d;
+    text-decoration: underline;
+}
+
+.handled-card:active {
+    transform: scale(0.98); /* Efek 'tekan' bila klik */
+}
