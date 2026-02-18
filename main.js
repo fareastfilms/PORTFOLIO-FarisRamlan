@@ -156,7 +156,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // 2. Bunyi Klik (Semua Button & Interactive Elements)
-    const interactiveElements = document.querySelectorAll('button, .nav-link, .video-card, .polaroid-card');
+    const interactiveElements = document.querySelectorAll('button, .nav-link, .video-card, .polaroid-card, .handled-card');
     interactiveElements.forEach(el => {
         el.addEventListener('click', () => {
             clickSound.currentTime = 0;
